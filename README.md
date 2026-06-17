@@ -2,7 +2,7 @@
 
 ![App](app-logo.jpg)
 
-A clean, minimalistic-dedign todo app built with **React** and **Tailwind CSS**.<br>
+A clean, minimalistic-design todo app built with **React** and **Tailwind CSS**.<br>
 **yashlist.** was a hands-on deep dive into React fundamentals like hooks, state management, conditional rendering, etc. all applied in one real, usable project.
 
 | Desktop | Mobile |
