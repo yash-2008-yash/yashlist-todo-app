@@ -44,14 +44,14 @@ function App() {
   }
 
 
-  const handleEdit = (id) => {
+  const handleEdit = (e, id) => {
     let t = todos.find(i => i.id === id)
     setTodo(t.todo)
     setEditID(id)
   }
 
 
-  const handleDelete = (id) => {
+  const handleDelete = (e, id) => {
     let newTodos = todos.filter(item => item.id !== id)
     setTodos(newTodos)
   }
