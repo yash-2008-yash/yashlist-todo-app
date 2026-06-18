@@ -1,13 +1,16 @@
 # **yashlist.** by YASHWANTH M
 
-![App](app-logo.jpg)
+![App](./assets/app-logo.jpg)
 
 A clean, minimalistic-design todo app built with **React** and **Tailwind CSS**.<br>
 **yashlist.** was a hands-on deep dive into React fundamentals like hooks, state management, conditional rendering, etc. all applied in one real, usable project.
 
+The App is live now!
+## [Check out `yashlist.` app](https://yashlist-todo-app.vercel.app/)
+
 | Desktop | Mobile |
 |--------|--------|
-| ![Desktop Preview](preview.jpg) | ![Mobile Preview](phone-preview.jpg) |
+| ![Desktop Preview](./assets/preview.jpg) | ![Mobile Preview](./assets/phone-preview.jpg) |
 
 ## Features
 
