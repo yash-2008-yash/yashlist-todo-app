@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 // Imported Components
 import Logo from "./components/Logo"
@@ -26,10 +26,7 @@ function App() {
   const [todo, setTodo] = useState("")
   const [editID, setEditID] = useState(null)
   const [showFinished, setShowFinished] = useState(true)
-
-  const [showIntro, setShowIntro] = useState(() => {
-    return !localStorage.getItem("introSeen")
-  })
+  const [showIntro, setShowIntro] = useState(true)
   const [fadeOut, setFadeOut] = useState(false)
 
   useEffect(() => {
@@ -37,20 +34,17 @@ function App() {
   }, [todos])
 
   useEffect(() => {
-    if (showIntro) {
-      const fadeTimer = setTimeout(() => {
-        setFadeOut(true)
-      }, 2000)
+    const fadeTimer = setTimeout(() => {
+      setFadeOut(true)
+    }, 2200)
 
-      const removeTimer = setTimeout(() => {
-        setShowIntro(false)
-        localStorage.setItem("introSeen", "true")
-      }, 2700)
+    const removeTimer = setTimeout(() => {
+      setShowIntro(false)
+    }, 3000)
 
-      return () => {
-        clearTimeout(fadeTimer)
-        clearTimeout(removeTimer)
-      }
+    return () => {
+      clearTimeout(fadeTimer)
+      clearTimeout(removeTimer)
     }
   }, [])
 
@@ -98,13 +92,29 @@ function App() {
 
   return (<>
 
-    {/* Intro Screen */}
+    {/* Intro of the yaslist. app */}
     {showIntro && (
-      <div className="fixed inset-0 z-50 flex flex-col justify-center items-center bg-black"
-        style={{ opacity: fadeOut ? 0 : 1, transition: "opacity 700ms ease-in-out" }}>
-        <IoMdCheckmarkCircleOutline className="text-8xl text-green-500 mb-4" />
-        <h1 className="text-5xl font-light">yashlist.</h1>
-        <p className="text-gray-400 mt-3 text-lg">your tasks, your way.</p>
+      <div style={{
+        position: "fixed", inset: 0, zIndex: 50,
+        display: "flex", justifyContent: "center", alignItems: "center",
+        backgroundColor: "black",
+        animation: fadeOut ? "introFadeOut 800ms ease-in-out forwards" : "none"
+      }}>
+
+        <div style={{ display: "flex", alignItems: "center", overflow: "hidden" }}>
+
+          <IoMdCheckmarkCircleOutline style={{ fontSize: "5rem", color: "#22c55e", animation: "nudgeLeft 600ms ease-out 400ms forwards", flexShrink: 0 }} />
+
+          <h1 style={{
+            fontSize: "3rem",
+            fontWeight: 300,
+            marginLeft: "0.25rem",
+            whiteSpace: "nowrap",
+            animation: "slideInText 700ms cubic-bezier(0.16, 1, 0.3, 1) 500ms both"
+          }}>yashlist.
+          </h1>
+
+        </div>
       </div>
     )}
 
