@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 // Imported Components
 import Logo from "./components/Logo"
@@ -8,6 +8,7 @@ import SeparationLine from "./components/SeparationLine"
 import { MdEdit } from "react-icons/md";
 import { FaCheckCircle } from "react-icons/fa"
 import { MdRadioButtonUnchecked } from "react-icons/md";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdDeleteOutline } from "react-icons/md";
 
 // uuid npm package for unique IDs for each todo
@@ -26,9 +27,32 @@ function App() {
   const [editID, setEditID] = useState(null)
   const [showFinished, setShowFinished] = useState(true)
 
+  const [showIntro, setShowIntro] = useState(() => {
+    return !localStorage.getItem("introSeen")
+  })
+  const [fadeOut, setFadeOut] = useState(false)
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos))
   }, [todos])
+
+  useEffect(() => {
+    if (showIntro) {
+      const fadeTimer = setTimeout(() => {
+        setFadeOut(true)
+      }, 2000)
+
+      const removeTimer = setTimeout(() => {
+        setShowIntro(false)
+        localStorage.setItem("introSeen", "true")
+      }, 2700)
+
+      return () => {
+        clearTimeout(fadeTimer)
+        clearTimeout(removeTimer)
+      }
+    }
+  }, [])
 
 
   const handleAdd = () => {
@@ -73,6 +97,16 @@ function App() {
 
 
   return (<>
+
+    {/* Intro Screen */}
+    {showIntro && (
+      <div className="fixed inset-0 z-50 flex flex-col justify-center items-center bg-black"
+        style={{ opacity: fadeOut ? 0 : 1, transition: "opacity 700ms ease-in-out" }}>
+        <IoMdCheckmarkCircleOutline className="text-8xl text-green-500 mb-4" />
+        <h1 className="text-5xl font-light">yashlist.</h1>
+        <p className="text-gray-400 mt-3 text-lg">your tasks, your way.</p>
+      </div>
+    )}
 
     {/* Logo Section */}
     <div className="flex flex-col justify-between items-center lg:flex-row mb-1">
